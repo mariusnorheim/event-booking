@@ -1,0 +1,10 @@
+version: "0.2"
+
+phases:
+    pre_build:
+        commands:
+            - npm install
+    build:
+        commands:
+            - PARAMS="$(cat params.json | npx ts-node transform-params.ts)"
+            - npm run cdk -- deploy "*" --require-approval never
